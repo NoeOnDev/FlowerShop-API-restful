@@ -13,8 +13,12 @@ const {
   JWT_EXPIRES_IN,
 } = process.env;
 
+if (!DB_HOST || !DB_PORT || !DB_USER || !DB_PASS || !DB_NAME) {
+  throw new Error("Missing required database environment variables");
+}
+
 export const envConfig = {
-  port: PORT,
+  port: PORT || 3000,
   db: {
     host: DB_HOST,
     port: DB_PORT,
@@ -23,7 +27,7 @@ export const envConfig = {
     name: DB_NAME,
   },
   jwt: {
-    secret: JWT_SECRET,
-    expiresIn: JWT_EXPIRES_IN,
+    secret: JWT_SECRET || "defaultSecret",
+    expiresIn: JWT_EXPIRES_IN || "12h",
   },
 };
