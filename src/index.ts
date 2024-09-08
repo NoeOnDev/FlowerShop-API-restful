@@ -9,6 +9,7 @@ const port = envConfig.port;
 app.use(express.json());
 
 app.post("/products", (req, res) => productController.createProduct(req, res));
+app.get("/products/:id", (req, res) => productController.findProductById(req, res));
 
 pool
   .connect()

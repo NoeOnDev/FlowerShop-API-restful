@@ -16,4 +16,8 @@ export class ProductService {
     );
     await this.productRepository.save(product);
   }
+
+  async findById(id: number): Promise<Product | undefined> {
+    return this.productRepository.findById(id);
+  }
 }
