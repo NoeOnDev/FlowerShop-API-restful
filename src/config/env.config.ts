@@ -2,16 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const {
-  PORT,
-  DB_HOST,
-  DB_PORT,
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
-  JWT_SECRET,
-  JWT_EXPIRES_IN,
-} = process.env;
+const { PORT, DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;
 
 if (!DB_HOST || !DB_PORT || !DB_USER || !DB_PASS || !DB_NAME) {
   throw new Error("Missing required database environment variables");
@@ -25,9 +16,5 @@ export const envConfig = {
     user: DB_USER,
     pass: DB_PASS,
     name: DB_NAME,
-  },
-  jwt: {
-    secret: JWT_SECRET || "defaultSecret",
-    expiresIn: JWT_EXPIRES_IN || "12h",
   },
 };
