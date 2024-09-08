@@ -1,9 +1,14 @@
 import express from "express";
 import { envConfig } from "./config/env.config";
 import pool from "./config/dbConnection";
+import { productController } from "./catalog/config/dependencyInjection";
 
 const app = express();
 const port = envConfig.port;
+
+app.use(express.json());
+
+app.post("/products", (req, res) => productController.createProduct(req, res));
 
 pool
   .connect()
