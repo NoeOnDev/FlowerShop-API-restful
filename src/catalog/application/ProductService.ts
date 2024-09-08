@@ -7,7 +7,7 @@ export class ProductService {
 
   async createProduct(command: CreateProductCommand): Promise<void> {
     const product = new Product(
-      command.id,
+      0,
       command.name,
       command.description,
       command.price,

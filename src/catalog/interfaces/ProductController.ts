@@ -7,9 +7,8 @@ export class ProductController {
 
   async createProduct(req: Request, res: Response): Promise<void> {
     try {
-      const { id, name, description, price, stock, category } = req.body;
+      const { name, description, price, stock, category } = req.body;
       const command = new CreateProductCommand(
-        id,
         name,
         description,
         price,

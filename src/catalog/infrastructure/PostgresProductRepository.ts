@@ -7,24 +7,19 @@ export class PostgresProductRepository implements ProductRepository {
 
   async save(product: Product): Promise<void> {
     const query = `
-      INSERT INTO products (id, name, description, price, stock, category)
-      VALUES ($1, $2, $3, $4, $5, $6)
-      ON CONFLICT (id) DO UPDATE
-      SET name = EXCLUDED.name,
-          description = EXCLUDED.description,
-          price = EXCLUDED.price,
-          stock = EXCLUDED.stock,
-          category = EXCLUDED.category;
+      INSERT INTO products (name, description, price, stock, category)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id;
     `;
     const values = [
-      product.getId(),
       product.getName(),
       product.getDescription(),
       product.getPrice(),
       product.getStock(),
       product.getCategory(),
     ];
-    await this.pool.query(query, values);
+    const result = await this.pool.query(query, values);
+    product.setId(result.rows[0].id);
   }
 
   async findById(id: number): Promise<Product | undefined> {

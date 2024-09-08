@@ -48,6 +48,10 @@ export class Product {
     return this.id;
   }
 
+  public setId(id: number): void {
+    this.id = id;
+  }
+
   public getName(): string {
     return this.name;
   }
