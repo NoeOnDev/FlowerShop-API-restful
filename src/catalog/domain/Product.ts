@@ -48,10 +48,6 @@ export class Product {
     return this.id;
   }
 
-  public setId(id: number): void {
-    this.id = id;
-  }
-
   public getName(): string {
     return this.name;
   }
@@ -70,5 +66,29 @@ export class Product {
 
   public getCategory(): string {
     return this.category;
+  }
+
+  public setId(id: number): void {
+    this.id = id;
+  }
+
+  public setName(name: string): void {
+    this.name = name;
+  }
+
+  public setDescription(description: string): void {
+    this.description = description;
+  }
+
+  public setPrice(price: number): void {
+    this.price = price;
+  }
+
+  public setStock(stock: number): void {
+    this.stock = stock;
+  }
+
+  public setCategory(category: string): void {
+    this.category = category;
   }
 }
