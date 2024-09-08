@@ -20,4 +20,27 @@ export class ProductService {
   async findById(id: number): Promise<Product | undefined> {
     return this.productRepository.findById(id);
   }
+
+  async findAll(): Promise<Product[]> {
+    return this.productRepository.findAll();
+  }
+
+  async updateProduct(
+    id: number,
+    command: CreateProductCommand
+  ): Promise<void> {
+    const product = new Product(
+      id,
+      command.name,
+      command.description,
+      command.price,
+      command.stock,
+      command.category
+    );
+    await this.productRepository.update(product);
+  }
+
+  async deleteById(id: number): Promise<void> {
+    await this.productRepository.deleteById(id);
+  }
 }

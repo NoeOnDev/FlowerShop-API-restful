@@ -35,4 +35,41 @@ export class ProductController {
       res.status(500).send(error);
     }
   }
+
+  async findAllProducts(_req: Request, res: Response): Promise<void> {
+    try {
+      const products = await this.productService.findAll();
+      res.status(200).json(products);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
+  async updateProduct(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const { name, description, price, stock, category } = req.body;
+      const command = new CreateProductCommand(
+        name,
+        description,
+        price,
+        stock,
+        category
+      );
+      await this.productService.updateProduct(Number(id), command);
+      res.status(200).send();
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
+  async deleteProductById(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      await this.productService.deleteById(Number(id));
+      res.status(200).send();
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
 }
