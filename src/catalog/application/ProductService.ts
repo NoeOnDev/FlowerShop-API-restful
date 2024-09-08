@@ -5,7 +5,7 @@ import { Product } from "../domain/Product";
 export class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
-  createProduct(command: CreateProductCommand): void {
+  async createProduct(command: CreateProductCommand): Promise<void> {
     const product = new Product(
       command.id,
       command.name,
@@ -14,6 +14,6 @@ export class ProductService {
       command.stock,
       command.category
     );
-    this.productRepository.save(product);
+    await this.productRepository.save(product);
   }
 }
