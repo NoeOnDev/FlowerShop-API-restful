@@ -1,24 +1,13 @@
 import express from "express";
-import { envConfig } from "./config/env.config";
 import pool from "./config/dbConnection";
-import { productController } from "./catalog/config/dependencyInjection";
+import { envConfig } from "./config/env.config";
+import { productRouter } from "./catalog/interfaces/routes";
 
 const app = express();
 const port = envConfig.port;
 
 app.use(express.json());
-
-app.post("/products", (req, res) => productController.createProduct(req, res));
-app.get("/products/:id", (req, res) =>
-  productController.findProductById(req, res)
-);
-app.get("/products", (req, res) => productController.findAllProducts(req, res));
-app.put("/products/:id", (req, res) =>
-  productController.updateProduct(req, res)
-);
-app.delete("/products/:id", (req, res) =>
-  productController.deleteProductById(req, res)
-);
+app.use(productRouter);
 
 pool
   .connect()
