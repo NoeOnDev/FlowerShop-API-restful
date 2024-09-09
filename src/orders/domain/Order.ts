@@ -81,39 +81,7 @@ export class Order {
     return this.customerAddress;
   }
 
-  public setStatus(status: string) {
-    this.status = status;
-  }
-
-  public setCustomerName(customerName: string) {
-    this.customerName = customerName;
-  }
-
-  public setCustomerEmail(customerEmail: string) {
-    this.customerEmail = customerEmail;
-  }
-
-  public setCustomerPhone(customerPhone: string) {
-    this.customerPhone = customerPhone;
-  }
-
-  public setCustomerAddress(customerAddress: string) {
-    this.customerAddress = customerAddress;
-  }
-
-  public setQuantity(quantity: number) {
-    this.quantity = quantity;
-  }
-
-  public setTotalPrice(totalPrice: number) {
-    this.totalPrice = totalPrice;
-  }
-
-  public setProductId(productId: number) {
-    this.productId = productId;
-  }
-
-  public setId(id: number) {
+  public setId(id: number): void {
     this.id = id;
   }
 }
