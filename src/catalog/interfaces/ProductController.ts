@@ -28,25 +28,34 @@ export class ProductController {
     }
   }
 
-  async findProductById(req: Request, res: Response): Promise<void> {
+  async findProductById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       const product = await this.productService.findById(Number(id));
-      if (!product) {
-        throw new CustomError("Product not found", 404);
+      if (product) {
+        res.status(200).json(product);
+      } else {
+        next(new CustomError("Product not found", 404));
       }
-      res.status(200).json(product);
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
-  async findAllProducts(_req: Request, res: Response): Promise<void> {
+  async findAllProducts(
+    _req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const products = await this.productService.findAll();
       res.status(200).json(products);
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
@@ -73,13 +82,17 @@ export class ProductController {
     }
   }
 
-  async deleteProductById(req: Request, res: Response): Promise<void> {
+  async deleteProductById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       await this.productService.deleteById(Number(id));
-      res.status(200).send();
+      res.status(204).send();
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 }
