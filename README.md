@@ -19,9 +19,6 @@ FlowerShop-API-restful
     │   └── validateRequest.ts
     │
     ├── catalog
-    │   ├── config
-    │   │   └── dependencyInjection.ts
-    │   │
     │   ├── domain
     │   │   ├── Product.ts
     │   │   └── ProductRepository.ts
@@ -31,19 +28,14 @@ FlowerShop-API-restful
     │   │   └── ProductService.ts
     │   │
     │   ├── infrastructure
-    │   │   └── PostgresProductRepository.ts
-    │   │
-    │   ├── interfaces
+    │   │   ├── PostgresProductRepository.ts
     │   │   ├── ProductController.ts
-    │   │   └── routes.ts
-    │   │
-    │   └── validators
-    │       └── productValidators.ts
+    │   │   ├── productRoutes.ts
+    │   │   ├── dependencyInjection.ts
+    │   │   └── validators
+    │   │       └── productValidators.ts
     │
     ├── order
-    │   ├── config
-    │   │   └── dependencyInjection.ts
-    │   │
     │   ├── domain
     │   │   ├── Order.ts
     │   │   └── OrderRepository.ts
@@ -53,14 +45,12 @@ FlowerShop-API-restful
     │   │   └── OrderService.ts
     │   │
     │   ├── infrastructure
-    │   │   └── PostgresOrderRepository.ts
-    │   │
-    │   ├── interfaces
+    │   │   ├── PostgresOrderRepository.ts
     │   │   ├── OrderController.ts
-    │   │   └── routes.ts
-    │   │
-    │   └── validators
-    │       └── orderValidators.ts
+    │   │   ├── orderRoutes.ts
+    │   │   ├── dependencyInjection.ts
+    │   │   └── validators
+    │   │       └── orderValidators.ts
     │
     └── index.ts
 ```
