@@ -5,8 +5,9 @@ services:
     build: .
     container_name: my_node_app
     ports:
-      - "9020:9020"
+      - "${PORT}:${PORT}"
     environment:
+      - PORT=${PORT}
       - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres
