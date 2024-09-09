@@ -10,8 +10,6 @@ export class OrderController {
       const {
         productId,
         quantity,
-        totalPrice,
-        status,
         customerName,
         customerEmail,
         customerPhone,
@@ -20,8 +18,6 @@ export class OrderController {
       const command = new CreateOrderCommand(
         productId,
         quantity,
-        totalPrice,
-        status,
         customerName,
         customerEmail,
         customerPhone,
@@ -63,8 +59,6 @@ export class OrderController {
       const {
         productId,
         quantity,
-        totalPrice,
-        status,
         customerName,
         customerEmail,
         customerPhone,
@@ -73,8 +67,6 @@ export class OrderController {
       const command = new CreateOrderCommand(
         productId,
         quantity,
-        totalPrice,
-        status,
         customerName,
         customerEmail,
         customerPhone,

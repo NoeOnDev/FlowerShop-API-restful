@@ -19,12 +19,15 @@ export class OrderService {
       throw new Error("Insufficient stock");
     }
 
+    const totalPrice = product.getPrice() * command.quantity;
+    const status = "processed";
+
     const order = new Order(
       0,
       command.productId,
       command.quantity,
-      command.totalPrice,
-      command.status,
+      totalPrice,
+      status,
       command.customerName,
       command.customerEmail,
       command.customerPhone,
@@ -45,12 +48,20 @@ export class OrderService {
   }
 
   async updateOrder(id: number, command: CreateOrderCommand): Promise<void> {
+    const product = await this.productRepository.findById(command.productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    const totalPrice = product.getPrice() * command.quantity;
+    const status = "processed";
+
     const order = new Order(
       id,
       command.productId,
       command.quantity,
-      command.totalPrice,
-      command.status,
+      totalPrice,
+      status,
       command.customerName,
       command.customerEmail,
       command.customerPhone,
