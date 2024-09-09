@@ -11,18 +11,20 @@ const port = envConfig.port;
 app.use(express.json());
 app.use(productRouter);
 app.use(orderRouter);
-
 app.use(errorHandler);
 
-pool
-  .connect()
-  .then(() => {
+async function startServer() {
+  try {
+    await pool.connect();
     console.log("Connected to database");
-  })
-  .catch((err) => {
-    console.error("Database connection error", err);
-  });
 
-app.listen(port, () => {
-  console.log("Server is running on port " + port);
-});
+    app.listen(port, () => {
+      console.log("Server is running on port " + port);
+    });
+  } catch (err) {
+    console.error("Database connection error", err);
+    process.exit(1);
+  }
+}
+
+startServer();
