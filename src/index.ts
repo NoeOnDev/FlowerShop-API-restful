@@ -37,7 +37,7 @@ async function connectWithRetry(retries: number, delay: number) {
 }
 
 async function startServer() {
-  const connected = await connectWithRetry(10, 5000);
+  const connected = await connectWithRetry(12, 5000);
   if (connected) {
     await createTables();
     app.listen(port, () => {
