@@ -17,17 +17,36 @@ app.get("/", (_req, res) => {
   res.send("Welcome to the API Flower Shop");
 });
 
-async function startServer() {
-  try {
-    await pool.connect();
-    console.log("Connected to database");
+async function connectWithRetry(retries: number, delay: number) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await pool.connect();
+      console.log("Connected to database");
+      return true;
+    } catch (err) {
+      console.error(
+        `Database connection error (attempt ${i + 1} of ${retries})`,
+        err
+      );
+      if (i < retries - 1) {
+        await new Promise((res) => setTimeout(res, delay));
+      }
+    }
+  }
+  return false;
+}
 
+async function startServer() {
+  const connected = await connectWithRetry(10, 5000);
+  if (connected) {
     await createTables();
     app.listen(port, () => {
       console.log("Server is running on port " + port);
     });
-  } catch (err) {
-    console.error("Database connection error", err);
+  } else {
+    console.error(
+      "Failed to connect to the database after multiple attempts, exiting."
+    );
     process.exit(1);
   }
 }
