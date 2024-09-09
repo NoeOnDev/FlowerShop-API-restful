@@ -54,13 +54,26 @@ export class OrderService {
       throw new CustomError("Product not found", 404);
     }
 
-    const totalPrice = product.getPrice() * command.quantity;
+    const existingOrder = await this.orderRepository.findById(id);
+    if (!existingOrder) {
+      throw new CustomError("Order not found", 404);
+    }
+
+    const newQuantity = command.quantity;
+    const oldQuantity = existingOrder.getQuantity();
+    const stockChange = newQuantity - oldQuantity;
+
+    if (product.getStock() < stockChange) {
+      throw new CustomError("Not enough stock", 400);
+    }
+
+    const totalPrice = product.getPrice() * newQuantity;
     const status = "processed";
 
     const order = new Order(
       id,
       command.productId,
-      command.quantity,
+      newQuantity,
       totalPrice,
       status,
       command.customerName,
@@ -68,7 +81,10 @@ export class OrderService {
       command.customerPhone,
       command.customerAddress
     );
+
     await this.orderRepository.update(order);
+    product.reduceStock(stockChange);
+    await this.productRepository.update(product);
   }
 
   async deleteById(id: number): Promise<void> {
