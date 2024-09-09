@@ -12,16 +12,22 @@ orderRouter.post(
   "/orders",
   createOrderValidator,
   validateRequest,
-  orderController.createOrder
+  orderController.createOrder.bind(orderController)
 );
-orderRouter.get("/orders/:id", orderController.findOrderById);
-orderRouter.get("/orders", orderController.findAllOrders);
+orderRouter.get(
+  "/orders/:id",
+  orderController.findOrderById.bind(orderController)
+);
+orderRouter.get("/orders", orderController.findAllOrders.bind(orderController));
 orderRouter.put(
   "/orders/:id",
   updateOrderValidator,
   validateRequest,
-  orderController.updateOrder
+  orderController.updateOrder.bind(orderController)
 );
-orderRouter.delete("/orders/:id", orderController.deleteOrderById);
+orderRouter.delete(
+  "/orders/:id",
+  orderController.deleteOrderById.bind(orderController)
+);
 
 export { orderRouter };

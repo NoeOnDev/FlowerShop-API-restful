@@ -12,16 +12,25 @@ productRouter.post(
   "/products",
   createProductValidator,
   validateRequest,
-  productController.createProduct
+  productController.createProduct.bind(productController)
 );
-productRouter.get("/products/:id", productController.findProductById);
-productRouter.get("/products", productController.findAllProducts);
+productRouter.get(
+  "/products/:id",
+  productController.findProductById.bind(productController)
+);
+productRouter.get(
+  "/products",
+  productController.findAllProducts.bind(productController)
+);
 productRouter.put(
   "/products/:id",
   updateProductValidator,
   validateRequest,
-  productController.updateProduct
+  productController.updateProduct.bind(productController)
 );
-productRouter.delete("/products/:id", productController.deleteProductById);
+productRouter.delete(
+  "/products/:id",
+  productController.deleteProductById.bind(productController)
+);
 
 export { productRouter };
