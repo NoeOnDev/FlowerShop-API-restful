@@ -2,6 +2,7 @@ import { OrderRepository } from "../domain/OrderRepository";
 import { CreateOrderCommand } from "./CreateOrderCommand";
 import { Order } from "../domain/Order";
 import { ProductRepository } from "../../catalog/domain/ProductRepository";
+import { CustomError } from "../../errors/CustomError";
 
 export class OrderService {
   constructor(
@@ -12,11 +13,11 @@ export class OrderService {
   async createOrder(command: CreateOrderCommand): Promise<void> {
     const product = await this.productRepository.findById(command.productId);
     if (!product) {
-      throw new Error("Product not found");
+      throw new CustomError("Product not found", 404);
     }
 
     if (product.getStock() < command.quantity) {
-      throw new Error("Insufficient stock");
+      throw new CustomError("Not enough stock", 400);
     }
 
     const totalPrice = product.getPrice() * command.quantity;
@@ -50,7 +51,7 @@ export class OrderService {
   async updateOrder(id: number, command: CreateOrderCommand): Promise<void> {
     const product = await this.productRepository.findById(command.productId);
     if (!product) {
-      throw new Error("Product not found");
+      throw new CustomError("Product not found", 404);
     }
 
     const totalPrice = product.getPrice() * command.quantity;

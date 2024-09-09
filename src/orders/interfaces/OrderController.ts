@@ -1,11 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { OrderService } from "../application/OrderService";
 import { CreateOrderCommand } from "../application/CreateOrderCommand";
+import { CustomError } from "../../errors/CustomError";
 
 export class OrderController {
   constructor(private orderService: OrderService) {}
 
-  async createOrder(req: Request, res: Response): Promise<void> {
+  async createOrder(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const {
         productId,
@@ -26,34 +31,46 @@ export class OrderController {
       await this.orderService.createOrder(command);
       res.status(201).send();
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
-  async findOrderById(req: Request, res: Response): Promise<void> {
+  async findOrderById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       const order = await this.orderService.findById(Number(id));
       if (order) {
         res.status(200).json(order);
       } else {
-        res.status(404).send("Order not found");
+        next(new CustomError("Order not found", 404));
       }
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
-  async findAllOrders(_req: Request, res: Response): Promise<void> {
+  async findAllOrders(
+    _req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const orders = await this.orderService.findAll();
       res.status(200).json(orders);
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
-  async updateOrder(req: Request, res: Response): Promise<void> {
+  async updateOrder(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       const {
@@ -75,17 +92,21 @@ export class OrderController {
       await this.orderService.updateOrder(Number(id), command);
       res.status(200).send();
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 
-  async deleteOrderById(req: Request, res: Response): Promise<void> {
+  async deleteOrderById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       await this.orderService.deleteById(Number(id));
       res.status(200).send();
     } catch (error) {
-      res.status(500).send(error);
+      next(error);
     }
   }
 }
