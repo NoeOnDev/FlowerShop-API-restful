@@ -1,13 +1,15 @@
+import { injectable, inject } from "inversify";
 import { OrderRepository } from "../domain/OrderRepository";
 import { CreateOrderCommand } from "./CreateOrderCommand";
 import { Order } from "../domain/Order";
 import { ProductRepository } from "../../catalog/domain/ProductRepository";
 import { CustomError } from "../../errors/CustomError";
 
+@injectable()
 export class OrderService {
   constructor(
-    private orderRepository: OrderRepository,
-    private productRepository: ProductRepository
+    @inject("OrderRepository") private orderRepository: OrderRepository,
+    @inject("ProductRepository") private productRepository: ProductRepository
   ) {}
 
   async createOrder(command: CreateOrderCommand): Promise<void> {

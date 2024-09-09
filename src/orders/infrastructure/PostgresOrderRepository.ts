@@ -1,7 +1,9 @@
+import { injectable } from "inversify";
 import { Pool } from "pg";
 import { Order } from "../domain/Order";
 import { OrderRepository } from "../domain/OrderRepository";
 
+@injectable()
 export class PostgresOrderRepository implements OrderRepository {
   constructor(private pool: Pool) {}
 

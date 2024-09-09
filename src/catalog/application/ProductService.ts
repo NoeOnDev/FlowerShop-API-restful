@@ -1,10 +1,14 @@
+import { injectable, inject } from "inversify";
 import { ProductRepository } from "../domain/ProductRepository";
 import { CreateProductCommand } from "./CreateProductCommand";
 import { Product } from "../domain/Product";
 import { CustomError } from "../../errors/CustomError";
 
+@injectable()
 export class ProductService {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(
+    @inject("ProductRepository") private productRepository: ProductRepository
+  ) {}
 
   async createProduct(command: CreateProductCommand): Promise<void> {
     const existingProduct = await this.productRepository.findByName(

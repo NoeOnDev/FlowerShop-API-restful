@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from "express";
+import { injectable, inject } from "inversify";
 import { OrderService } from "../application/OrderService";
 import { CreateOrderCommand } from "../application/CreateOrderCommand";
 import { CustomError } from "../../errors/CustomError";
 
+@injectable()
 export class OrderController {
-  constructor(private orderService: OrderService) {}
+  constructor(@inject(OrderService) private orderService: OrderService) {}
 
   async createOrder(
     req: Request,

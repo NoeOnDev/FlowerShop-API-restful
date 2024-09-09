@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from "express";
+import { injectable, inject } from "inversify";
 import { ProductService } from "../application/ProductService";
 import { CreateProductCommand } from "../application/CreateProductCommand";
 import { CustomError } from "../../errors/CustomError";
 
+@injectable()
 export class ProductController {
-  constructor(private productService: ProductService) {}
+  constructor(@inject(ProductService) private productService: ProductService) {}
 
   async createProduct(
     req: Request,

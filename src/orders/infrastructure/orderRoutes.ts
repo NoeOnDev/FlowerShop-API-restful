@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { orderController } from "./dependencyInjection";
+import { orderController } from "../../config/dependencyInjection";
 import {
   createOrderValidator,
   updateOrderValidator,

@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express from "express";
 import { pool, createTables } from "./config/dbConnection";
 import { envConfig } from "./config/env.config";
