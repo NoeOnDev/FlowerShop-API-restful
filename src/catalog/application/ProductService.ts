@@ -36,7 +36,12 @@ export class ProductService {
     id: number,
     command: CreateProductCommand
   ): Promise<void> {
-    const product = new Product(
+    const product = await this.productRepository.findById(id);
+    if (!product) {
+      throw new CustomError("Product not found", 404);
+    }
+
+    const updatedProduct = new Product(
       id,
       command.name,
       command.description,
@@ -44,7 +49,7 @@ export class ProductService {
       command.stock,
       command.category
     );
-    await this.productRepository.update(product);
+    await this.productRepository.update(updatedProduct);
   }
 
   async deleteById(id: number): Promise<void> {
