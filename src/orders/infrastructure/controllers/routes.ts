@@ -3,7 +3,7 @@ import { orderController } from "../dependencyInjection";
 import {
   createOrderValidator,
   updateOrderValidator,
-} from "../../validators/orderValidators";
+} from "../validators/orderValidators";
 import { validateRequest } from "../../../errors/validateRequest";
 
 const orderRouter = Router();

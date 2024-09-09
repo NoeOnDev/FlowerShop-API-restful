@@ -3,7 +3,7 @@ import { productController } from "../dependencyInjection";
 import {
   createProductValidator,
   updateProductValidator,
-} from "../../validators/productValidators";
+} from "../validators/productValidators";
 import { validateRequest } from "../../../errors/validateRequest";
 
 const productRouter = Router();
