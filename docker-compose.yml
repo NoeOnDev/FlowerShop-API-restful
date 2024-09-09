@@ -15,8 +15,8 @@ services:
       - DB_NAME=flowerShop
     depends_on:
       - db
-    volumes:
-      - .:/app
+    #volumes:
+    #  - .:/app
     command: npm start
 
   db:
