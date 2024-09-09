@@ -1,4 +1,4 @@
-import pool from "../../config/dbConnection";
+import {pool} from "../../config/dbConnection";
 import { PostgresOrderRepository } from "../infrastructure/PostgresOrderRepository";
 import { OrderController } from "../interfaces/OrderController";
 import { OrderService } from "../application/OrderService";

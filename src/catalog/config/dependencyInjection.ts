@@ -1,4 +1,4 @@
-import pool from "../../config/dbConnection";
+import { pool } from "../../config/dbConnection";
 import { PostgresProductRepository } from "../infrastructure/PostgresProductRepository";
 import { ProductService } from "../application/ProductService";
 import { ProductController } from "../interfaces/ProductController";

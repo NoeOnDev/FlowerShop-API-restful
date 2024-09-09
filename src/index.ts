@@ -1,5 +1,5 @@
 import express from "express";
-import pool from "./config/dbConnection";
+import { pool, createTables } from "./config/dbConnection";
 import { envConfig } from "./config/env.config";
 import { productRouter } from "./catalog/interfaces/routes";
 import { orderRouter } from "./orders/interfaces/routes";
@@ -22,6 +22,7 @@ async function startServer() {
     await pool.connect();
     console.log("Connected to database");
 
+    await createTables();
     app.listen(port, () => {
       console.log("Server is running on port " + port);
     });
