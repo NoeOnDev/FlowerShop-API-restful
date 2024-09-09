@@ -1,6 +1,6 @@
 FROM node:latest
 
-ARG PORT=9020
+ARG PORT=3000
 
 ENV PORT=${PORT}
 
@@ -14,6 +14,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 9020
+EXPOSE ${PORT}
 
 CMD ["npm", "start"]
