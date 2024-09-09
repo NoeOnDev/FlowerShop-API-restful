@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { ProductService } from "../../application/ProductService";
-import { CreateProductCommand } from "../../application/CreateProductCommand";
-import { CustomError } from "../../../errors/CustomError";
+import { ProductService } from "../application/ProductService";
+import { CreateProductCommand } from "../application/CreateProductCommand";
+import { CustomError } from "../../errors/CustomError";
 
 export class ProductController {
   constructor(private productService: ProductService) {}

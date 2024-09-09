@@ -1,8 +1,8 @@
 import express from "express";
 import { pool, createTables } from "./config/dbConnection";
 import { envConfig } from "./config/env.config";
-import { productRouter } from "./catalog/infrastructure/controllers/routes";
-import { orderRouter } from "./orders/infrastructure/controllers/routes";
+import { productRouter } from "./catalog/infrastructure/productRoutes";
+import { orderRouter } from "./orders/infrastructure/orderRoutes";
 import { errorHandler } from "./errors/errorHandler";
 
 const app = express();

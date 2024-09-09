@@ -1,6 +1,6 @@
 import { pool } from "../../config/dbConnection";
 import { PostgresOrderRepository } from "../infrastructure/PostgresOrderRepository";
-import { OrderController } from "./controllers/OrderController";
+import { OrderController } from "./OrderController";
 import { OrderService } from "../application/OrderService";
 import { PostgresProductRepository } from "../../catalog/infrastructure/PostgresProductRepository";
 

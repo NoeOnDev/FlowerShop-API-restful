@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { orderController } from "../dependencyInjection";
+import { orderController } from "./dependencyInjection";
 import {
   createOrderValidator,
   updateOrderValidator,
-} from "../validators/orderValidators";
-import { validateRequest } from "../../../errors/validateRequest";
+} from "./validators/orderValidators";
+import { validateRequest } from "../../errors/validateRequest";
 
 const orderRouter = Router();
 
