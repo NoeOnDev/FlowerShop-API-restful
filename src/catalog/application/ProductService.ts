@@ -1,11 +1,18 @@
 import { ProductRepository } from "../domain/ProductRepository";
 import { CreateProductCommand } from "./CreateProductCommand";
 import { Product } from "../domain/Product";
+import { CustomError } from "../../errors/CustomError";
 
 export class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
   async createProduct(command: CreateProductCommand): Promise<void> {
+    const existingProduct = await this.productRepository.findByName(
+      command.name
+    );
+    if (existingProduct) {
+      throw new CustomError("Product already exists", 400);
+    }
     const product = new Product(
       0,
       command.name,

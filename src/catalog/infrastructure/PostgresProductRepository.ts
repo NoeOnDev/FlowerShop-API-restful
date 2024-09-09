@@ -39,6 +39,23 @@ export class PostgresProductRepository implements ProductRepository {
     );
   }
 
+  async findByName(name: string): Promise<Product | undefined> {
+    const query = "SELECT * FROM products WHERE name = $1";
+    const result = await this.pool.query(query, [name]);
+    if (result.rows.length === 0) {
+      return undefined;
+    }
+    const row = result.rows[0];
+    return new Product(
+      row.id,
+      row.name,
+      row.description,
+      row.price,
+      row.stock,
+      row.category
+    );
+  }
+
   async findAll(): Promise<Product[]> {
     const query = "SELECT * FROM products";
     const result = await this.pool.query(query);
