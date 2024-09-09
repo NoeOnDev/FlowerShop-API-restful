@@ -17,7 +17,7 @@ services:
       - DB_NAME=${DB_NAME}
     depends_on:
       - db
-    command: npm start
+    command: "wait-for-it.sh db:${DB_PORT} -- npm start"
 
   db:
     image: postgres:latest
