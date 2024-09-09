@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { OrderService } from "../application/OrderService";
-import { CreateOrderCommand } from "../application/CreateOrderCommand";
-import { CustomError } from "../../errors/CustomError";
+import { OrderService } from "../../application/OrderService";
+import { CreateOrderCommand } from "../../application/CreateOrderCommand";
+import { CustomError } from "../../../errors/CustomError";
 
 export class OrderController {
   constructor(private orderService: OrderService) {}

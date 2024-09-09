@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { productController } from "../config/dependencyInjection";
+import { productController } from "../dependencyInjection";
 import {
   createProductValidator,
   updateProductValidator,
-} from "../validators/productValidators";
-import { validateRequest } from "../../errors/validateRequest";
+} from "../../validators/productValidators";
+import { validateRequest } from "../../../errors/validateRequest";
 
 const productRouter = Router();
 
