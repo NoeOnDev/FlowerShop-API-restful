@@ -1,33 +1,32 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
     build: .
     container_name: my_node_app
     ports:
-      - "9020:9020"
+      - "${PORT}:${PORT}"
     environment:
       - NODE_ENV=development
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASS=postgres
-      - DB_NAME=flowerShop
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - PORT=${PORT}
     depends_on:
       - db
-    #volumes:
-    #  - .:/app
     command: npm start
 
   db:
     image: postgres:latest
     container_name: my_postgres_db
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: flowerShop
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
