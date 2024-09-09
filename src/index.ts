@@ -13,6 +13,10 @@ app.use(productRouter);
 app.use(orderRouter);
 app.use(errorHandler);
 
+app.get("/", (_req, res) => {
+  res.send("Welcome to the API Flower Shop");
+});
+
 async function startServer() {
   try {
     await pool.connect();
