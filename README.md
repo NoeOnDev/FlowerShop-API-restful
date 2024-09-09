@@ -4,6 +4,8 @@ Esta es una API Restful para una tienda de flores, construida siguiendo una arqu
 
 ## Estructura del Proyecto
 
+La combinación de una arquitectura hexagonal con DDD en la API de Flower Shop asegura que la aplicación no solo esté bien estructurada y sea fácil de mantener, sino también alineada estrechamente con los procesos de negocio reales, lo que facilita el crecimiento y la evolución continua del sistema.
+
 ```
 FlowerShop-API-restful
 │
