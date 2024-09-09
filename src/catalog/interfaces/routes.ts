@@ -1,22 +1,27 @@
 import { Router } from "express";
 import { productController } from "../config/dependencyInjection";
+import {
+  createProductValidator,
+  updateProductValidator,
+} from "../validators/productValidators";
+import { validateRequest } from "../../config/validateRequest";
 
 const productRouter = Router();
 
-productRouter.post("/products", (req, res, next) =>
-  productController.createProduct(req, res, next)
+productRouter.post(
+  "/products",
+  createProductValidator,
+  validateRequest,
+  productController.createProduct
 );
-productRouter.get("/products/:id", (req, res, next) =>
-  productController.findProductById(req, res, next)
+productRouter.get("/products/:id", productController.findProductById);
+productRouter.get("/products", productController.findAllProducts);
+productRouter.put(
+  "/products/:id",
+  updateProductValidator,
+  validateRequest,
+  productController.updateProduct
 );
-productRouter.get("/products", (req, res, next) =>
-  productController.findAllProducts(req, res, next)
-);
-productRouter.put("/products/:id", (req, res, next) =>
-  productController.updateProduct(req, res, next)
-);
-productRouter.delete("/products/:id", (req, res, next) =>
-  productController.deleteProductById(req, res, next)
-);
+productRouter.delete("/products/:id", productController.deleteProductById);
 
 export { productRouter };

@@ -1,22 +1,27 @@
 import { Router } from "express";
 import { orderController } from "../config/dependencyInjection";
+import {
+  createOrderValidator,
+  updateOrderValidator,
+} from "../validators/orderValidators";
+import { validateRequest } from "../../config/validateRequest";
 
 const orderRouter = Router();
 
-orderRouter.post("/orders", (req, res, next) =>
-  orderController.createOrder(req, res, next)
+orderRouter.post(
+  "/orders",
+  createOrderValidator,
+  validateRequest,
+  orderController.createOrder
 );
-orderRouter.get("/orders/:id", (req, res, next) =>
-  orderController.findOrderById(req, res, next)
+orderRouter.get("/orders/:id", orderController.findOrderById);
+orderRouter.get("/orders", orderController.findAllOrders);
+orderRouter.put(
+  "/orders/:id",
+  updateOrderValidator,
+  validateRequest,
+  orderController.updateOrder
 );
-orderRouter.get("/orders", (req, res, next) =>
-  orderController.findAllOrders(req, res, next)
-);
-orderRouter.put("/orders/:id", (req, res, next) =>
-  orderController.updateOrder(req, res, next)
-);
-orderRouter.delete("/orders/:id", (req, res, next) =>
-  orderController.deleteOrderById(req, res, next)
-);
+orderRouter.delete("/orders/:id", orderController.deleteOrderById);
 
 export { orderRouter };
