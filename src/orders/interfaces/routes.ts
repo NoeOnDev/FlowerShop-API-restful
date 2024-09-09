@@ -4,7 +4,7 @@ import {
   createOrderValidator,
   updateOrderValidator,
 } from "../validators/orderValidators";
-import { validateRequest } from "../../config/validateRequest";
+import { validateRequest } from "../../errors/validateRequest";
 
 const orderRouter = Router();
 

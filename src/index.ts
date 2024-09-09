@@ -3,7 +3,7 @@ import pool from "./config/dbConnection";
 import { envConfig } from "./config/env.config";
 import { productRouter } from "./catalog/interfaces/routes";
 import { orderRouter } from "./orders/interfaces/routes";
-import { errorHandler } from "./config/errorHandler";
+import { errorHandler } from "./errors/errorHandler";
 
 const app = express();
 const port = envConfig.port;

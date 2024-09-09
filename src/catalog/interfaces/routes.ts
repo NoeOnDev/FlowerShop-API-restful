@@ -4,7 +4,7 @@ import {
   createProductValidator,
   updateProductValidator,
 } from "../validators/productValidators";
-import { validateRequest } from "../../config/validateRequest";
+import { validateRequest } from "../../errors/validateRequest";
 
 const productRouter = Router();
 
