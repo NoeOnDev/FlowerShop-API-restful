@@ -11,7 +11,9 @@ FlowerShop-API-restful
     │
     ├── config
     │   ├── dbConnection.ts
-    │   └── env.config.ts
+    │   ├── env.config.ts
+    │   ├── inversify.config.ts
+    │   └── dependencyInjection.ts
     │
     ├── errors
     │   ├── CustomError.ts
@@ -31,7 +33,6 @@ FlowerShop-API-restful
     │   │   ├── PostgresProductRepository.ts
     │   │   ├── ProductController.ts
     │   │   ├── productRoutes.ts
-    │   │   ├── dependencyInjection.ts
     │   │   └── validators
     │   │       └── productValidators.ts
     │
@@ -48,7 +49,6 @@ FlowerShop-API-restful
     │   │   ├── PostgresOrderRepository.ts
     │   │   ├── OrderController.ts
     │   │   ├── orderRoutes.ts
-    │   │   ├── dependencyInjection.ts
     │   │   └── validators
     │   │       └── orderValidators.ts
     │
