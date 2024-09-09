@@ -16,8 +16,9 @@ services:
       - DB_PASS=${DB_PASS}
       - DB_NAME=${DB_NAME}
     depends_on:
-      - db
-    command: "wait-for-it.sh db:${DB_PORT} -- npm start"
+      db:
+        condition: service_healthy
+    command: npm start
 
   db:
     image: postgres:latest
@@ -30,6 +31,11 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
 
 volumes:
   postgres_data:
